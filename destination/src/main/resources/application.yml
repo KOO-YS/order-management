@@ -1,0 +1,21 @@
+quarkus:
+  http:
+    port: 8084
+
+kafka:
+  bootstrap:
+    servers: localhost:9092
+
+mp:
+  messaging:
+    incoming:
+      out-for-delivery:
+        connector: smallrye-kafka
+        value:
+          deserializer: com.manage.model.ProductDeserializer
+
+    outgoing:
+      to-customer:
+        connector: smallrye-kafka
+        value:
+          serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer
