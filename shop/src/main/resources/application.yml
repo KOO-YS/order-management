@@ -12,7 +12,7 @@ mp:
       order-product:  # topic
         connector: smallrye-kafka
         value:
-          deserializer: com.manage.model.ProductDeserializer
+          deserializer: com.manage.model.TrackingDeserializer
 
     outgoing:
       shipped:

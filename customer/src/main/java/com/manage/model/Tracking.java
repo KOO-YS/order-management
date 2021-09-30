@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Builder
+@ToString
 public class Tracking extends PanacheEntityBase {
     @Id @GeneratedValue
     private Long id;

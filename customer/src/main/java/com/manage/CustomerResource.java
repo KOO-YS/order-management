@@ -23,14 +23,13 @@ public class CustomerResource {
 
     private static final Logger LOG = Logger.getLogger(CustomerResource.class);
 
-    // TODO : Tracking 객체와 DB 전용 Entity 합쳐보기
     @Inject
     TrackingResource trackingResource;
     @Inject
     ProductResource productResource;
 
     @Channel("order-product")
-    Emitter<Product> productEmitter;
+    Emitter<Tracking> trackingEmitter;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -41,15 +40,15 @@ public class CustomerResource {
     @POST
     @Transactional
     public Response orderProduct(Product product) {
-        // TODO : DB에 저장
         Product saveProduct = productResource.add(product);
         LOG.info("save Product -> "+ product);
-        Tracking tracking = Tracking.builder().product(saveProduct).status("customer order product").build();
+        Tracking tracking = Tracking.builder().product(saveProduct).status("customer order product (주문 완료)").build();
+        // DB에 저장
         tracking = trackingResource.add(tracking);
 
         LOG.info(tracking);
         // refs -> https://quarkus.io/guides/resteasy-reactive#returning-a-response-body
-        productEmitter.send(product);
+        trackingEmitter.send(tracking);
 
         return Response.ok().entity(product).build();
     }
@@ -58,7 +57,7 @@ public class CustomerResource {
     @Incoming("to-customer")
     public void getTrackingStatus(Tracking tracking) {
         // DB 정보 업데이트 하기
+        LOG.info("GET DELIVERY MESSAGE \n -> "+tracking);
         trackingResource.update(tracking.getId(), tracking);
-        LOG.info("GET DELIVERY MESSAGE : "+tracking);
     }
 }

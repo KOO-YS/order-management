@@ -12,7 +12,7 @@ mp:
       out-for-delivery:
         connector: smallrye-kafka
         value:
-          deserializer: com.manage.model.ProductDeserializer
+          deserializer: com.manage.model.TrackingDeserializer
 
     outgoing:
       to-customer:

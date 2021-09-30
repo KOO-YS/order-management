@@ -15,24 +15,19 @@ public class SortingResource {
     private static final Logger LOG = Logger.getLogger(SortingResource.class);
 
     @Channel("out-for-delivery")
-    Emitter<Product> deliveryEmitter;
+    Emitter<Tracking> deliveryEmitter;
 
     @Channel("to-customer")
     Emitter<Tracking> trackingEmitter;
 
     @Incoming("shipped")
-    public void shipped(Product product) throws InterruptedException {
-        System.out.println("comfirm shipping form shop -> "+product);
-        for(int i=5; i>0; i--) {
-            Thread.sleep(1000);
+    public void shipped(Tracking tracking) throws InterruptedException {
+        LOG.info("Wait for 5 seconds");
+        Thread.sleep(5000);
 //            LOG.info("start shipping "+i+" seconds after...");
-        }
-        Tracking tracking = Tracking
-                .builder()
-                .id(product.getId()).product(product).status("out for delivery (최종 배송지로 발송)")
-                .build();
-        deliveryEmitter.send(product);
-        trackingEmitter.send(tracking);
+        tracking.setStatus("out for delivery (최종 배송지로 발송)");
         LOG.info(tracking);
+        deliveryEmitter.send(tracking);
+        trackingEmitter.send(tracking);
     }
 }
