@@ -1,6 +1,30 @@
 quarkus:
   http:
     port: 8081
+# DB
+  datasource:
+    db-kind: postgresql
+    username: postgres
+    password: 1234
+    jdbc:
+      url: jdbc:postgresql://localhost:5433/
+      driver: org.postgresql.Driver
+  hibernate-orm:
+    database:
+      generation: drop-and-create
+    log:
+      sql: true
+
+  log:
+    file:
+      enable: true
+      path: logging/info.log
+      level: INFO
+      format: '%d{HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n'
+    category:
+
+
+
 
 kafka:
   bootstrap:
@@ -19,3 +43,5 @@ mp:
         connector: smallrye-kafka
         value:
           deserializer: com.manage.model.TrackingDeserializer
+
+

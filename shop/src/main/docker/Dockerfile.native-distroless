@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native-distroless -t quarkus/order .
+# docker build -f src/main/docker/Dockerfile.native-distroless -t quarkus/shop .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/order
+# docker run -i --rm -p 8080:8080 quarkus/shop
 #
 ###
 FROM quay.io/quarkus/quarkus-distroless-image:1.0

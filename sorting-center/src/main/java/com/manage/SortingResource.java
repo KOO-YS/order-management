@@ -5,11 +5,14 @@ import com.manage.model.Tracking;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class SortingResource {
+
+    private static final Logger LOG = Logger.getLogger(SortingResource.class);
 
     @Channel("out-for-delivery")
     Emitter<Product> deliveryEmitter;
@@ -22,7 +25,7 @@ public class SortingResource {
         System.out.println("comfirm shipping form shop -> "+product);
         for(int i=5; i>0; i--) {
             Thread.sleep(1000);
-            System.out.println("start shipping "+i+" seconds after...");
+//            LOG.info("start shipping "+i+" seconds after...");
         }
         Tracking tracking = Tracking
                 .builder()
@@ -30,5 +33,6 @@ public class SortingResource {
                 .build();
         deliveryEmitter.send(product);
         trackingEmitter.send(tracking);
+        LOG.info(tracking);
     }
 }

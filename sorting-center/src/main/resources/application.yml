@@ -19,3 +19,8 @@ mp:
         connector: smallrye-kafka
         value:
           serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer
+
+      to-customer:
+        connector: smallrye-kafka
+        value:
+          serializer: io.quarkus.kafka.client.serialization.ObjectMapperSerializer

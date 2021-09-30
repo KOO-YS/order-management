@@ -15,7 +15,7 @@
         <module>common</module>
 
         <module>customer</module>
-        <module>order</module>
+        <module>shop</module>
         <module>sorting-center</module>
         <module>destination</module>
     </modules>

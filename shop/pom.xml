@@ -7,13 +7,10 @@
         <artifactId>order-management</artifactId>
         <groupId>com.manage</groupId>
         <version>1.0-SNAPSHOT</version>
-<!--        <relativePath>../pom.xml</relativePath>  &lt;!&ndash; this must match your parent pom location &ndash;&gt;-->
     </parent>
-<!--    <groupId>com.manage</groupId>-->
-    <artifactId>order</artifactId>
+    <!--    <groupId>com.manage</groupId>-->
+    <artifactId>shop</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
     <properties>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
@@ -37,13 +34,15 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-config-yaml</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
@@ -52,10 +51,6 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-config-yaml</artifactId>
         </dependency>
     </dependencies>
     <build>
