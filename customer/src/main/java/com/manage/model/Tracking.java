@@ -1,7 +1,10 @@
 package com.manage.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.mongodb.panache.PanacheMongoEntityBase;
+import io.quarkus.mongodb.panache.common.MongoEntity;
 import lombok.*;
+import org.bson.codecs.pojo.annotations.BsonId;
 
 import javax.persistence.*;
 
@@ -13,6 +16,8 @@ import javax.persistence.*;
 @Builder
 @ToString
 public class Tracking extends PanacheEntityBase {
+
+//    @BsonId
     @Id @GeneratedValue
     private Long id;
 

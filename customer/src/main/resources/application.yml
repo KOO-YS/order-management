@@ -14,14 +14,19 @@ quarkus:
       generation: drop-and-create
     log:
       sql: true
+#  NoSQL
+  mongodb:
+    connection-string: mongodb://root:1234@localhost:27017/tracking
+    database: tracking
 
+#  LOG
   log:
     file:
       enable: true
       path: logging/info.log
       level: INFO
       format: '%d{HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n'
-    category:
+#    category:
 
 
 

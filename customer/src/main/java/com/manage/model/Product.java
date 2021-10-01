@@ -1,13 +1,15 @@
 package com.manage.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
+@Builder
 @ToString
 public class Product extends PanacheEntityBase {
 //public class Product extends PanacheEntityBase {

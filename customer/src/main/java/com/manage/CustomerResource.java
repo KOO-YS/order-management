@@ -3,6 +3,7 @@ package com.manage;
 import com.manage.model.Product;
 import com.manage.model.Tracking;
 import com.manage.resource.ProductResource;
+import com.manage.resource.TrackingMongoResource;
 import com.manage.resource.TrackingResource;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
@@ -27,6 +28,8 @@ public class CustomerResource {
     TrackingResource trackingResource;
     @Inject
     ProductResource productResource;
+    @Inject
+    TrackingMongoResource mongoRepository;
 
     @Channel("order-product")
     Emitter<Tracking> trackingEmitter;
@@ -34,7 +37,10 @@ public class CustomerResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return "Hello RESTEasy";
+        Product testP = Product.builder().description("PRODCCCU").name("NAMEP").build();
+        Tracking testT = Tracking.builder().product(testP).status("HI").build();
+        testT = mongoRepository.add(testT);
+        return mongoRepository.get(testT.getId()).toString();
     }
 
     @POST
